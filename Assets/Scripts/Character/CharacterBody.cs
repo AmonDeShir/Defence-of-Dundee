@@ -1,19 +1,17 @@
 using UnityEngine;
 
-public class CharacterBody {
+public class CharacterBody : MonoBehaviour {
     public Transform Head;
     public Transform Body;
+    public Transform LeftKnee;
+    public Transform RightKnee;
     public Transform LeftLeg;
     public Transform RightLeg;
     public Transform LeftArm;
     public Transform RightArm;
+    public Transform LeftHand;
+    public Transform RightHand;
+    public Transform Gun;
 
-    public CharacterBody(Transform parent) {
-        this.Head = parent.Find("Head");
-        this.Body = parent.Find("Body");
-        this.LeftLeg = parent.Find("LeftLeg");
-        this.RightLeg = parent.Find("RightLeg");
-        this.LeftArm = parent.Find("LeftArm");
-        this.RightArm = parent.Find("RightArm");
-    }
+    public Transform GroundCheck;
 }

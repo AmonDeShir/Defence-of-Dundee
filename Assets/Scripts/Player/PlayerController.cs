@@ -1,18 +1,28 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : CustomCharacterController
+public class PlayerController : CharacterController2D
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    protected float jumpTimer = 0f;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    void Update() {
+        direction = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+
+        if (Input.GetKeyDown(KeyCode.Space)) {
+            jumpTimer += Time.deltaTime;
+            Debug.Log(jumpTimer);
+        }
+
+        if (Input.GetKeyUp(KeyCode.Space)) {
+            jump = true;
+
+            if (direction.y <= -1f) {
+                ultraJump = true;
+            }
+
+            jumpTimer = 0f;
+        }
     }
 }
