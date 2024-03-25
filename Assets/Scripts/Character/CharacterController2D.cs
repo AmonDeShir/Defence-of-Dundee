@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -29,6 +30,10 @@ public class CharacterController2D : MonoBehaviour
         direction = Vector2.zero;
     }
 
+    protected void Update() {
+        animator.SetBool("run", direction.x != 0);
+        animator.SetInteger("direction", Math.Sign(direction.x));
+    }
 
     void FixedUpdate()
     {
