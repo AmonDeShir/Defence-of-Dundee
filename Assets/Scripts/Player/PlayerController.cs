@@ -7,14 +7,13 @@ public class PlayerController : CharacterController2D
 {
     protected float jumpTimer = 0f;
 
-    void Update() {
+    protected new void Update() {
         base.Update();
         
         direction = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
 
         if (Input.GetKeyDown(KeyCode.Space)) {
             jumpTimer += Time.deltaTime;
-            Debug.Log(jumpTimer);
         }
 
         if (Input.GetKeyUp(KeyCode.Space)) {

@@ -32,7 +32,7 @@ public class CharacterController2D : MonoBehaviour
 
     protected void Update() {
         animator.SetBool("run", direction.x != 0);
-        animator.SetInteger("direction", Math.Sign(direction.x));
+        animator.SetInteger("direction", Math.Sign(direction.x * body.GetFrontSide()));
     }
 
     void FixedUpdate()
