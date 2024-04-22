@@ -56,5 +56,6 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "Defence of Dundee.sln"
+    "dotnet.defaultSolution": "Defence-of-Dundee.sln",
+    "dotnet.preferCSharpExtension": true
 }
