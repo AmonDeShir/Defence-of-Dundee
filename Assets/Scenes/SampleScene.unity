@@ -1177,6 +1177,26 @@ PrefabInstance:
       propertyPath: maxPowerJumpMultiplication
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 2703250451898072407, guid: 659a35b7657740f689b1903690554a1e, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2703250451898072407, guid: 659a35b7657740f689b1903690554a1e, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2703250451898072407, guid: 659a35b7657740f689b1903690554a1e, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2703250451898072407, guid: 659a35b7657740f689b1903690554a1e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2703250451898072407, guid: 659a35b7657740f689b1903690554a1e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4065042379953378506, guid: 659a35b7657740f689b1903690554a1e, type: 3}
       propertyPath: m_Name
       value: Player
