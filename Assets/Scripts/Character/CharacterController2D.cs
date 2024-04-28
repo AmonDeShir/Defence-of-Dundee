@@ -19,6 +19,7 @@ public class CharacterController2D : MonoBehaviour
     public float ultraJumpPower = 800f;
     public float fallSpeed = 5f;
 
+    protected bool crouch;
     protected bool jump;
     protected bool ultraJump;
 
@@ -32,12 +33,20 @@ public class CharacterController2D : MonoBehaviour
 
     protected void Update() {
         animator.SetBool("run", direction.x != 0);
+        animator.SetBool("jump", jump);
+        animator.SetBool("crouch", crouch);
         animator.SetInteger("direction", Math.Sign(direction.x * body.GetFrontSide()));
     }
 
     void FixedUpdate()
     {
-        rb.velocity = new Vector2(direction.x * speed * Time.deltaTime, rb.velocity.y);
+        float stop_movement = 1;
+
+        if (crouch) {
+            stop_movement = 0;
+        }
+
+        rb.velocity = new Vector2(direction.x * stop_movement * speed * Time.deltaTime, rb.velocity.y);
 
         if (jump && IsOnGround()) {
             var power = ultraJump ? ultraJumpPower : jumpPower;

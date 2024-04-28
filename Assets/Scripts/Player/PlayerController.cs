@@ -12,11 +12,13 @@ public class PlayerController : CharacterController2D
         
         direction = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
 
-        if (Input.GetKeyDown(KeyCode.Space)) {
+        if (Input.GetButtonDown("Jump")) {
             jumpTimer += Time.deltaTime;
+            crouch = true;
         }
 
-        if (Input.GetKeyUp(KeyCode.Space)) {
+        if (Input.GetButtonUp("Jump")) {
+            crouch = false;
             jump = true;
 
             if (direction.y <= -1f) {
