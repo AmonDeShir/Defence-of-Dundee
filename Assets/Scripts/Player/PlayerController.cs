@@ -11,10 +11,10 @@ public class PlayerController : CharacterController2D
         base.Update();
         
         direction = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+        crouch = direction.y <= -1f && IsOnGround();
 
         if (Input.GetButtonDown("Jump")) {
             jumpTimer += Time.deltaTime;
-            crouch = true;
         }
 
         if (Input.GetButtonUp("Jump")) {
