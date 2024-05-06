@@ -21,4 +21,9 @@ public class FollowCamera : MonoBehaviour
 
         transform.position = Vector3.Lerp(transform.position, target, Time.deltaTime * Speed);
     }
+
+    public void TeleportCameraToTarget() {
+        var offset = new Vector3(margin.x * Target.GetFrontSide(), margin.y, margin.z);
+        transform.position = Target.transform.position + offset;
+    }
 }
