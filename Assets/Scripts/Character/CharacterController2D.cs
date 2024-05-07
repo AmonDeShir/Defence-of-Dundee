@@ -51,7 +51,7 @@ public class CharacterController2D : MonoBehaviour
             rb.velocity = new Vector2(rb.velocity.x, power * Time.deltaTime);
         }
 
-        if (rb.velocity.y < 0) {
+        if (rb.velocity.y < 2) {
             rb.velocity -= statistics.fallSpeed * Time.deltaTime * new Vector2(0, -Physics2D.gravity.y);
         }
 
