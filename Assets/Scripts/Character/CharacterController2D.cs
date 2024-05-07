@@ -8,17 +8,14 @@ using UnityEngine;
 [RequireComponent(typeof(CharacterBody))]
 public class CharacterController2D : MonoBehaviour
 {
+    public NPCData statistics;
+
     public LayerMask GroundLayer;
     protected Animator animator;
     protected Rigidbody2D rb; 
     protected CharacterBody body;
     protected Vector2 direction;
     
-    public float speed = 100f;
-    public float jumpPower = 400f;
-    public float ultraJumpPower = 800f;
-    public float fallSpeed = 5f;
-
     protected bool crouch;
     protected bool jump;
     protected bool ultraJump;
@@ -46,16 +43,16 @@ public class CharacterController2D : MonoBehaviour
             stop_movement = 0;
         }
 
-        rb.velocity = new Vector2(direction.x * stop_movement * speed * Time.deltaTime, rb.velocity.y);
+        rb.velocity = new Vector2(direction.x * stop_movement * statistics.speed * Time.deltaTime, rb.velocity.y);
 
         if (jump && IsOnGround()) {
-            var power = ultraJump ? ultraJumpPower : jumpPower;
+            var power = ultraJump ? statistics.ultraJump : statistics.jump;
 
             rb.velocity = new Vector2(rb.velocity.x, power * Time.deltaTime);
         }
 
         if (rb.velocity.y < 0) {
-            rb.velocity -= fallSpeed * Time.deltaTime * new Vector2(0, -Physics2D.gravity.y);
+            rb.velocity -= statistics.fallSpeed * Time.deltaTime * new Vector2(0, -Physics2D.gravity.y);
         }
 
         jump = false;

@@ -4,19 +4,19 @@ using UnityEngine;
 
 public class PlayerKillable : Killable
 {
+    public PlayerData data;
     public FollowCamera Camera;
-    protected Vector3 lastCheckPoint;
 
     public void Start() {
-        lastCheckPoint = this.transform.position;
+        this.SetCheckPoint(this.transform.position);
     }
 
     public void SetCheckPoint(Vector3 checkPoint) {
-        this.lastCheckPoint = checkPoint;
+        data.checkpoint = checkPoint;
     }
 
     public override void Kill() {
-        this.transform.position = lastCheckPoint;
+        this.transform.position = data.checkpoint;
         Camera.TeleportCameraToTarget();
     }
 }

@@ -1093,13 +1093,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6daabda795b9dbaeab52d4634b0c44a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  statistics: {fileID: 11400000, guid: e9b76155b585f435a8cc07448fcecf17, type: 2}
   GroundLayer:
     serializedVersion: 2
     m_Bits: 64
-  speed: 200
-  jumpPower: 300
-  ultraJumpPower: 500
-  fallSpeed: 1.5
 --- !u!114 &79487146831896750
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1112,6 +1109,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39f167f5b38084ef5a80f8397b380d78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  data: {fileID: 0}
   Camera: {fileID: 0}
 --- !u!1 &8182361878309908398
 GameObject:
