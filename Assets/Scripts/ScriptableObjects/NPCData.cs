@@ -13,4 +13,5 @@ public class NPCData : ScriptableObject
     public int jump;
     public int ultraJump;
     public int fallSpeed;
+    public int run;
 }

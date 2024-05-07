@@ -19,6 +19,7 @@ public class CharacterController2D : MonoBehaviour
     protected bool crouch;
     protected bool jump;
     protected bool ultraJump;
+    protected bool run;
 
     void Start()
     {
@@ -37,13 +38,17 @@ public class CharacterController2D : MonoBehaviour
 
     void FixedUpdate()
     {
-        float stop_movement = 1;
-
-        if (crouch) {
-            stop_movement = 0;
+        float movement_speed = statistics.speed;
+        
+        if (run) {
+            movement_speed *= statistics.run;
         }
 
-        rb.velocity = new Vector2(direction.x * stop_movement * statistics.speed * Time.deltaTime, rb.velocity.y);
+        if (crouch) {
+            movement_speed = 0;
+        }
+
+        rb.velocity = new Vector2(direction.x * movement_speed  * Time.deltaTime, rb.velocity.y);
 
         if (jump && IsOnGround()) {
             var power = ultraJump ? statistics.ultraJump : statistics.jump;
