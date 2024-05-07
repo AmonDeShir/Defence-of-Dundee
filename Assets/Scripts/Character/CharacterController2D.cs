@@ -22,6 +22,8 @@ public class CharacterController2D : MonoBehaviour
     protected bool run;
     protected bool instantFall;
 
+    public Vector2 Direction { get { return direction; }}
+
     void Start()
     {
         animator = GetComponent<Animator>();

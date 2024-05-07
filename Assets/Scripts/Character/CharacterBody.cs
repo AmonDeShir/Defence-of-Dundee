@@ -19,6 +19,8 @@ public class CharacterBody : MonoBehaviour {
     private bool isFlipped;
 
     public bool IsFlipped { get { return isFlipped; } }
+    public bool IsMovingBackward = false;
+
 
     public void Flip(bool left) {
         isFlipped = left;
