@@ -17,7 +17,7 @@ MonoBehaviour:
   attack: 50
   speed: 500
   jump: 500
-  ultraJump: 1000
+  ultraJump: 800
   fallSpeed: 1
   level: 0
-  checkpoint: {x: 4.5, y: -2.37, z: 0}
+  checkpoint: {x: 51.74, y: -2.03, z: 0}
