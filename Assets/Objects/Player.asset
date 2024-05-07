@@ -15,9 +15,9 @@ MonoBehaviour:
   name: Player
   hp: 1000
   attack: 50
-  speed: 500
-  jump: 500
-  ultraJump: 800
-  fallSpeed: 1
+  speed: 400
+  jump: 300
+  ultraJump: 500
+  fallSpeed: 4
   level: 0
-  checkpoint: {x: 51.74, y: -2.03, z: 0}
+  checkpoint: {x: 1.9, y: -2.86, z: 0}
