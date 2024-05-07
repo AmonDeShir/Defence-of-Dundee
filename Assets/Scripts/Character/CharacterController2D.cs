@@ -20,6 +20,7 @@ public class CharacterController2D : MonoBehaviour
     protected bool jump;
     protected bool ultraJump;
     protected bool run;
+    protected bool instantFall;
 
     void Start()
     {
@@ -56,12 +57,18 @@ public class CharacterController2D : MonoBehaviour
             rb.velocity = new Vector2(rb.velocity.x, power * Time.deltaTime);
         }
 
-        if (rb.velocity.y < 2) {
-            rb.velocity -= statistics.fallSpeed * Time.deltaTime * new Vector2(0, -Physics2D.gravity.y);
+        if (rb.velocity.y < 2 || instantFall) {
+            var fallSpeed = instantFall ? statistics.fallSpeed * 10 : statistics.fallSpeed;
+            rb.velocity -= fallSpeed * Time.deltaTime * new Vector2(0, -Physics2D.gravity.y);
+
+            if (instantFall) {
+                rb.velocityX = 0;
+            }
         }
 
         jump = false;
         ultraJump = false;
+        instantFall = false;
     }
 
     protected bool IsOnGround() {

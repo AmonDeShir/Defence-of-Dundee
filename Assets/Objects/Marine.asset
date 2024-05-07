@@ -15,6 +15,8 @@ MonoBehaviour:
   name: Marine
   hp: 100
   attack: 10
-  speed: 200
+  speed: 100
   jump: 300
   ultraJump: 500
+  fallSpeed: 4
+  run: 2
