@@ -9,15 +9,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 543f7287f8a25bb79b126ecd3095729b, type: 3}
-  m_Name: Marine
+  m_Script: {fileID: 11500000, guid: 03e6305f655cf372488faeb075913341, type: 3}
+  m_Name: PlayerSpeed
   m_EditorClassIdentifier: 
-  name: Marine
-  hp: 100
-  attack: 10
-  speed: 100
+  name: Player
+  attack: 50
+  speed: 220
   jump: 300
   ultraJump: 500
   fallSpeed: 4
   run: 2
   maxJumpCount: 2
+  MaxHP: 500
+  hp: 100
+  level: 0
+  checkpoint: {x: 1.9, y: -2.849, z: 0}

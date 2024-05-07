@@ -1,4 +1,5 @@
 using System;
+using UnityEngine.AI;
 
 [Serializable]
 public class Timer {
@@ -6,6 +7,7 @@ public class Timer {
 
     public bool IsStopped;
     public readonly bool IsInterval;
+    public readonly bool IsOneShoot;
 
     public float Time;
 
@@ -14,15 +16,16 @@ public class Timer {
 
     public delegate void TimeoutEventHandler();
 
-    public Timer(float time, bool autostart = true, bool interval = false) {
+    public Timer(float time, bool autostart = true, bool interval = false, bool oneShoot = false) {
         this.IsStopped = !autostart;
-        this.IsInterval = false;
+        this.IsInterval = interval;
+        this.IsOneShoot = oneShoot;
         this.Time = time;
         this.timeLeft = time;
     }
 
-    public Timer(float time, TimeoutEventHandler handler, bool autostart = true, bool interval = false): this(time, autostart, interval) {
-        OnTimeout += handler;        
+    public Timer(float time, TimeoutEventHandler handler, bool autostart = true, bool interval = false, bool oneShoot = false): this(time, autostart, interval, oneShoot) {
+        OnTimeout += handler;  
     }
 
     public void Start() {
@@ -44,6 +47,10 @@ public class Timer {
         
             if (!IsInterval) {
                 IsStopped = true;
+            }
+
+            if (IsOneShoot) {
+                OnTimeout = null;
             }
         }
     }

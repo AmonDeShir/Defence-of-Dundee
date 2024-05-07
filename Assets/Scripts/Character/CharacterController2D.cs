@@ -8,7 +8,7 @@ using UnityEngine;
 [RequireComponent(typeof(CharacterBody))]
 public class CharacterController2D : MonoBehaviour
 {
-    public NPCData statistics;
+    public MovementStats statistics;
 
     public LayerMask GroundLayer;
     protected Animator animator;
@@ -26,12 +26,17 @@ public class CharacterController2D : MonoBehaviour
 
     public Vector2 Direction { get { return direction; }}
 
+    public Timer stoppedTimer;
+
+    protected bool stopped = false;
+
     void Start()
     {
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         body = GetComponent<CharacterBody>();
         direction = Vector2.zero;
+        stoppedTimer = new Timer(0.5f, StartMovement, false);
     }
 
     protected void Update() {
@@ -40,10 +45,17 @@ public class CharacterController2D : MonoBehaviour
         animator.SetBool("crouch", crouch);
         animator.SetInteger("direction", Math.Sign(direction.x * body.GetFrontSide()));
         animator.SetFloat("velocityY", rb.velocityY);
+
+        stoppedTimer.Update();
     }
 
     void FixedUpdate()
     {
+        if (stopped) {
+            Debug.Log("movement stopped!");
+            return;
+        }
+
         float movement_speed = statistics.speed;
         
         if (run) {
@@ -93,5 +105,16 @@ public class CharacterController2D : MonoBehaviour
         }
 
         return jumpCount < statistics.maxJumpCount;
+    }
+
+    public void StopMovement(float time = 0.5f) {
+        stopped = true;
+        stoppedTimer.Time = time;
+        stoppedTimer.Start();
+    }
+
+    public void StartMovement() {
+        stopped = false;
+        stoppedTimer.IsStopped = true;
     }
 }

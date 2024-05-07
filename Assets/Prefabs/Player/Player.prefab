@@ -1024,6 +1024,7 @@ MonoBehaviour:
   RightHand: {fileID: 2702654155058388997}
   Gun: {fileID: 6846095056231507113}
   GroundCheck: {fileID: 4240403660074910953}
+  IsMovingBackward: 0
 --- !u!114 &7307689953498893984
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1064,8 +1065,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39f167f5b38084ef5a80f8397b380d78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data: {fileID: 11400000, guid: e9b76155b585f435a8cc07448fcecf17, type: 2}
+  data: {fileID: 0}
   Camera: {fileID: 0}
+  hitForce: 1
 --- !u!70 &5201330036450151904
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

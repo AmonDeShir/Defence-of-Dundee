@@ -172,7 +172,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animationTime: 0.15
-  jumpPower: 600
+  jumpPower: 11
   timer:
     IsStopped: 0
     Time: 0
