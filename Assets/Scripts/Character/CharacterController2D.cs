@@ -22,6 +22,8 @@ public class CharacterController2D : MonoBehaviour
     protected bool run;
     protected bool instantFall;
 
+    protected int jumpCount;
+
     public Vector2 Direction { get { return direction; }}
 
     void Start()
@@ -37,6 +39,7 @@ public class CharacterController2D : MonoBehaviour
         animator.SetBool("jump", jump);
         animator.SetBool("crouch", crouch);
         animator.SetInteger("direction", Math.Sign(direction.x * body.GetFrontSide()));
+        animator.SetFloat("velocityY", rb.velocityY);
     }
 
     void FixedUpdate()
@@ -53,10 +56,15 @@ public class CharacterController2D : MonoBehaviour
 
         rb.velocity = new Vector2(direction.x * movement_speed  * Time.deltaTime, rb.velocity.y);
 
-        if (jump && IsOnGround()) {
-            var power = ultraJump ? statistics.ultraJump : statistics.jump;
+        if (jump && CanJump()) {
+            var power = statistics.jump;
+
+            if (crouch && ultraJump && jumpCount == 0) {
+                power = statistics.ultraJump;
+            }
 
             rb.velocity = new Vector2(rb.velocity.x, power * Time.deltaTime);
+            jumpCount += 1;
         }
 
         if (rb.velocity.y < 2 || instantFall) {
@@ -75,5 +83,15 @@ public class CharacterController2D : MonoBehaviour
 
     protected bool IsOnGround() {
         return Physics2D.OverlapCapsule(body.GroundCheck.position, new Vector2(0.2f, 0.02f), CapsuleDirection2D.Horizontal, 0, GroundLayer);
+    }
+
+    protected bool CanJump() {
+        if (IsOnGround()) {
+            jumpCount = 0;
+
+            return true;
+        }
+
+        return jumpCount < statistics.maxJumpCount;
     }
 }

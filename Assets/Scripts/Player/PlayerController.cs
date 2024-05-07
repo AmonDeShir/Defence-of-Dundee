@@ -8,13 +8,11 @@ public class PlayerController : CharacterController2D
 {
     protected new void Update() {
         base.Update();
-        
         direction = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
     }
 
     public void OnJump(InputAction.CallbackContext context) {
         if (context.started) {
-            crouch = false;
             jump = true;
 
             if (direction.y <= -1f) {

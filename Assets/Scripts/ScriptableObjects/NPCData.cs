@@ -8,10 +8,10 @@ public class NPCData : ScriptableObject
     public new string name;
     public string hp;
     public int attack;
-
     public int speed;
     public int jump;
     public int ultraJump;
     public int fallSpeed;
     public int run;
+    public int maxJumpCount;
 }

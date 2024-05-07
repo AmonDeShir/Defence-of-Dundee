@@ -20,5 +20,6 @@ MonoBehaviour:
   ultraJump: 500
   fallSpeed: 4
   run: 2
+  maxJumpCount: 2
   level: 0
-  checkpoint: {x: 25.52, y: -11.78, z: 0}
+  checkpoint: {x: 1.9, y: -2.849, z: 0}
