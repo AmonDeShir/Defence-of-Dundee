@@ -24,6 +24,11 @@ public class FollowCamera : MonoBehaviour
 
     public void TeleportCameraToTarget() {
         var offset = new Vector3(margin.x * Target.GetFrontSide(), margin.y, margin.z);
-        transform.position = Target.transform.position + offset;
+        var target = Target.transform.position + offset;
+        var delta = Vector3.Normalize(target - transform.position);
+
+        var animationMargin = new Vector3(-delta.x * 10, -delta.y * 10, 0);
+
+        transform.position = Target.transform.position + offset + animationMargin;
     }
 }
