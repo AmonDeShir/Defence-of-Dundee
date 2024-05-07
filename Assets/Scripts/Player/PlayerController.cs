@@ -38,7 +38,7 @@ public class PlayerController : CharacterController2D
         if (context.started) {
             bool grounded = IsOnGround();
 
-            instantFall = !grounded;
+            instantFall = grounded ? InstantFallState.DISABLED : InstantFallState.START;
             crouch = grounded;
         }
 

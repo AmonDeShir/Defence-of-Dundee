@@ -3,6 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum InstantFallState {
+    DISABLED,
+    START,
+    FREEZE,
+    FALL,
+}
+
 [RequireComponent(typeof(CharacterBody))]
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(CharacterBody))]
@@ -20,7 +27,8 @@ public class CharacterController2D : MonoBehaviour
     protected bool jump;
     protected bool ultraJump;
     protected bool run;
-    protected bool instantFall;
+    protected InstantFallState instantFall;
+    public Timer instantFallTimer;
 
     protected int jumpCount;
 
@@ -37,6 +45,7 @@ public class CharacterController2D : MonoBehaviour
         body = GetComponent<CharacterBody>();
         direction = Vector2.zero;
         stoppedTimer = new Timer(0.5f, StartMovement, false);
+        instantFallTimer = new Timer(0.1f, StartInstantFall, false);
     }
 
     protected void Update() {
@@ -46,13 +55,24 @@ public class CharacterController2D : MonoBehaviour
         animator.SetInteger("direction", Math.Sign(direction.x * body.GetFrontSide()));
         animator.SetFloat("velocityY", rb.velocityY);
 
+        instantFallTimer.Update();
         stoppedTimer.Update();
     }
 
     void FixedUpdate()
     {
         if (stopped) {
-            Debug.Log("movement stopped!");
+            return;
+        }
+
+        if (instantFall == InstantFallState.START) {
+            instantFall = InstantFallState.FREEZE;
+            instantFallTimer.Start();
+            return;
+        }
+
+        if (instantFall == InstantFallState.FREEZE) {
+            rb.velocity = Vector2.zero;
             return;
         }
 
@@ -79,18 +99,18 @@ public class CharacterController2D : MonoBehaviour
             jumpCount += 1;
         }
 
-        if (rb.velocity.y < 2 || instantFall) {
-            var fallSpeed = instantFall ? statistics.fallSpeed * 10 : statistics.fallSpeed;
+        if (rb.velocity.y < 2 || instantFall == InstantFallState.FALL) {
+            var fallSpeed = instantFall == InstantFallState.FALL ? statistics.fallSpeed * 10 : statistics.fallSpeed;
             rb.velocity -= fallSpeed * Time.deltaTime * new Vector2(0, -Physics2D.gravity.y);
 
-            if (instantFall) {
+            if (instantFall == InstantFallState.FALL) {
                 rb.velocityX = 0;
             }
         }
 
         jump = false;
         ultraJump = false;
-        instantFall = false;
+        instantFall = InstantFallState.DISABLED;
     }
 
     protected bool IsOnGround() {
@@ -116,5 +136,9 @@ public class CharacterController2D : MonoBehaviour
     public void StartMovement() {
         stopped = false;
         stoppedTimer.IsStopped = true;
+    }
+
+    public void StartInstantFall() {
+        instantFall = InstantFallState.FALL;
     }
 }
