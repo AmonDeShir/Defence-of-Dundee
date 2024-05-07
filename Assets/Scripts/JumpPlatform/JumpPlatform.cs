@@ -6,7 +6,7 @@ using UnityEngine;
 public class JumpPlatform : MonoBehaviour
 {
     public float animationTime = 5f;
-    public float jumpPower = 600f;
+    public float jumpPower = 11f;
 
     [SerializeField]
     private Timer timer;
@@ -38,15 +38,19 @@ public class JumpPlatform : MonoBehaviour
             target = collider.attachedRigidbody;
             animator.Play("Jump");
             timer.Start();
+            Debug.Log("Start Jump!");
         }
     } 
 
     void OnTriggerExit2D(Collider2D collider) {
         var rb = collider.attachedRigidbody;  
 
-        if (target == rb) {
+        if (target == rb && !timer.IsStopped) {
             target = null;
             timer.IsStopped = true;
+            deactivationTimer.IsStopped = true;
+            previousTarget = null;
+            Debug.Log("Canceled!");
         }
     }
 
@@ -58,13 +62,18 @@ public class JumpPlatform : MonoBehaviour
                 power *= 1.25f;
             }
 
-            target.velocity = new Vector2(target.velocity.x, power * Time.deltaTime);
+            target.velocity = new Vector2(target.velocity.x, power);
             previousTarget = target;
             deactivationTimer.Start();
+
+            Debug.Log(power);
+            Debug.Log(target.velocity);
+            target = null;
         }
     }
 
     private void Deactivate() {
         previousTarget = null;
+        Debug.Log("Deactivated!");
     }
 }

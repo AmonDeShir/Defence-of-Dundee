@@ -635,7 +635,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 194052359645584448, guid: 86d689f5ca8274967a3a1b8582f43121, type: 3}
       propertyPath: jumpPower
-      value: 600
+      value: 700
       objectReference: {fileID: 0}
     - target: {fileID: 5409204981506743711, guid: 86d689f5ca8274967a3a1b8582f43121, type: 3}
       propertyPath: m_Name
@@ -769,7 +769,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 194052359645584448, guid: 86d689f5ca8274967a3a1b8582f43121, type: 3}
       propertyPath: jumpPower
-      value: 600
+      value: 700
       objectReference: {fileID: 0}
     - target: {fileID: 5409204981506743711, guid: 86d689f5ca8274967a3a1b8582f43121, type: 3}
       propertyPath: m_Name
@@ -917,7 +917,7 @@ Transform:
   m_GameObject: {fileID: 802681942}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 49.11, y: -9.99, z: 0}
+  m_LocalPosition: {x: 48.04, y: -11.37, z: 0}
   m_LocalScale: {x: 4, y: 4, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -949,7 +949,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 4
+  m_Constraints: 7
 --- !u!70 &802681947
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
