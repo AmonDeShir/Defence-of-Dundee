@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,8 +14,7 @@ public class DroneEnemyController : MonoBehaviour
     protected float groundScan = 1f;
 
     [SerializeField]
-    protected Vector3 targetPoint;
-    public Transform target;
+    protected Vector3 targetPosition;
 
     public AStar pathfinder;
 
@@ -28,66 +28,85 @@ public class DroneEnemyController : MonoBehaviour
 
     protected Vector3 margin;
 
-    public Tilemap ground;
+
+    private Vector2 lastCollision;
+    private float collisionsDistance;
+
+    private FlagTimer flyOffTImer;
+
 
     void Start()
     {
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
 
+        flyOffTImer = new FlagTimer(0.5f);
+
         path = new();
         animator.Play("Idle");
+        lastCollision = Vector2.zero;
+        collisionsDistance = 1f;
     }
 
-    public void ScanPath() {
-        animator.Play("Scan");
-        Debug.Log("RB 1");
+    public void PlanPath(Vector3 targetPosition) {
+        this.targetPosition = targetPosition;
 
-        var times = 10;
-
-        do {
-            targetPoint = target.transform.position + new Vector3(Random.Range(-4, 4), Random.Range(1, 5), 0);
-            times -= 1;
-            
-            if (times <= 0) {
-                targetPoint = target.transform.position;
-                break;
-            }
-
-        } while(ground.HasTile(ground.WorldToCell(targetPoint)));
-
-        Debug.Log("RB 2");
         if (!Linecast()) {
-            Debug.Log("RB 3");
-            path = new Stack<Vector3>(new []{ targetPoint });
+            path = new Stack<Vector3>(new []{ targetPosition });
             Speed = CloseTravelSpeed;
         }
         else {
-            Debug.Log("RB 4");
-            path = pathfinder.Find(transform.position, targetPoint, 100);
+            path = pathfinder.Find(transform.position, targetPosition, 100);
             margin = transform.position - path.First();
             Speed = LongTravelSpeed;
-            Debug.Log("RB 5");
         }
     }
 
+    public bool IsOnTarget() {
+        return path.Count == 0;
+    }
+
     protected bool Linecast() {
-        return Physics2D.Linecast(transform.position, targetPoint, GroundLayer);
+        return Physics2D.Linecast(transform.position, targetPosition, GroundLayer);
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        var contact = collision.contacts[0];
+
+        collisionsDistance = Vector2.Distance(lastCollision, contact.point);
+        lastCollision = contact.point;
+
+        rb.velocity /= 4;
+        rb.AddForce(contact.normal * 10000);
+        flyOffTImer.Start();
     }
 
     void Update() {
+        flyOffTImer.Update();
+
+        if (!flyOffTImer.IsStopped) {
+            return;
+        }
+
         if (path.Count > 0) {
             animator.Play("Walk");
-            progress = Mathf.Clamp01(progress + (Speed * Time.deltaTime));
-            rb.MovePosition(Vector3.Lerp(transform.position, path.First() + margin, progress));
 
-            if (progress >= 1f || Vector3.Distance(this.transform.position, path.First() + margin) <= 0.1f) {
-                progress = 0f;
+            var target = path.First() + margin;
+            var delta = transform.position - target;
+            rb.velocity = delta.normalized * -1 * Time.fixedDeltaTime * Speed; 
+
+            if (Vector2.Distance(target, transform.position) < 0.1 || IsStuck()) {
+                collisionsDistance = 1f;
                 path.Pop();
             }
         }
         else {
-            ScanPath();
+            animator.Play("Idle");
         }
+    }
+
+    bool IsStuck() {
+        return collisionsDistance < 0.5f;
     }
 }

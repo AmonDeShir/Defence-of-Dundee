@@ -30,8 +30,6 @@ public class AStar : MonoBehaviour {
     }
 
     public Stack<Vector3> Find(Vector2 from, Vector2 to, int stepsLimit) {
-        UnityEngine.Debug.Log("As 1");
-
         queue.Clear();
         done.Clear();
         nodes.Clear();
@@ -59,7 +57,6 @@ public class AStar : MonoBehaviour {
             return new Stack<Vector3>();
         }
 
-        UnityEngine.Debug.Log("As 2");
         do {
             closest = findClosest();
             queue.Remove(closest);
@@ -78,7 +75,6 @@ public class AStar : MonoBehaviour {
         }
         while(!closest.Position.Equals(goal));
 
-        UnityEngine.Debug.Log("As 3");
         Stack<Vector3> points = new();
         while (closest != null) {
             if (Debug) {

@@ -36,9 +36,7 @@ public class JumpPlatform : MonoBehaviour
     void OnTriggerEnter2D(Collider2D collider) {
         if (target == null) {
             target = collider.attachedRigidbody;
-            animator.Play("Jump");
             timer.Start();
-            Debug.Log("Start Jump!");
         }
     } 
 
@@ -50,7 +48,6 @@ public class JumpPlatform : MonoBehaviour
             timer.IsStopped = true;
             deactivationTimer.IsStopped = true;
             previousTarget = null;
-            Debug.Log("Canceled!");
         }
     }
 
@@ -65,15 +62,11 @@ public class JumpPlatform : MonoBehaviour
             target.velocity = new Vector2(target.velocity.x, power);
             previousTarget = target;
             deactivationTimer.Start();
-
-            Debug.Log(power);
-            Debug.Log(target.velocity);
             target = null;
         }
     }
 
     private void Deactivate() {
         previousTarget = null;
-        Debug.Log("Deactivated!");
     }
 }
