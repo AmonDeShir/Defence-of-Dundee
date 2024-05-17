@@ -6,9 +6,16 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : CharacterController2D
 {
+    public Shoot weapon;
+    protected bool shoot = false;
+
     protected new void Update() {
         base.Update();
         direction = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+
+        if (shoot) {
+            weapon.SpawnBullet();
+        }
     }
 
     public void OnJump(InputAction.CallbackContext context) {
@@ -22,6 +29,13 @@ public class PlayerController : CharacterController2D
     }
 
     public void OnShoot(InputAction.CallbackContext context) {
+        if (context.started) {
+            shoot = true;
+        }
+        
+        else if (context.canceled) {
+            shoot = false;
+        }
     }
 
     public void OnRun(InputAction.CallbackContext context) {

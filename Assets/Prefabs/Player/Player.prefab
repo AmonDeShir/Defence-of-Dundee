@@ -829,6 +829,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6846095056231507113}
   - component: {fileID: 7830886711586814533}
+  - component: {fileID: 5716478451489451091}
   m_Layer: 0
   m_Name: Gun
   m_TagString: Untagged
@@ -848,7 +849,8 @@ Transform:
   m_LocalPosition: {x: 0.22929999, y: 0.035700005, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 4099213146830500190}
   m_Father: {fileID: 8314639850586470134}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &7830886711586814533
@@ -905,6 +907,55 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &5716478451489451091
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6627132827961829246}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2bf7d41ffc0a6a6d69a62b7599eefa76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bullet: {fileID: 1607919844137968100, guid: d7390e27960dd73a68e5b54b59166c38, type: 3}
+  canShoot:
+    Time: 0
+    timeLeft: 0
+  bulletSpawnPoint: {fileID: 4099213146830500190}
+  fireRate: 10
+--- !u!1 &7310315395566104686
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4099213146830500190}
+  m_Layer: 0
+  m_Name: BulletSpawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4099213146830500190
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7310315395566104686}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.1531, y: 0.034, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6846095056231507113}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7919197183534920234
 GameObject:
   m_ObjectHideFlags: 0
@@ -1053,6 +1104,15 @@ MonoBehaviour:
   GroundLayer:
     serializedVersion: 2
     m_Bits: 64
+  instantFallTimer:
+    IsStopped: 0
+    Time: 0
+    timeLeft: 0
+  stoppedTimer:
+    IsStopped: 0
+    Time: 0
+    timeLeft: 0
+  weapon: {fileID: 5716478451489451091}
 --- !u!114 &79487146831896750
 MonoBehaviour:
   m_ObjectHideFlags: 0

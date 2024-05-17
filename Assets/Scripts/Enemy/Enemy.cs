@@ -15,10 +15,9 @@ public class Enemy : MonoBehaviour
         set { hp = Mathf.Clamp(value, 0, MaxHP); }
     }
 
-    // Start is called before the first frame update
     void Start()
     {
-        
+        HP = MaxHP;
     }
 
     // Update is called once per frame
