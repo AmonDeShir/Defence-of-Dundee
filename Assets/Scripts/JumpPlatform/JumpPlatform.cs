@@ -34,8 +34,9 @@ public class JumpPlatform : MonoBehaviour
     }
 
     void OnTriggerEnter2D(Collider2D collider) {
-        if (target == null) {
+        if (target == null && !collider.CompareTag("Bullet")) {
             target = collider.attachedRigidbody;
+            animator.Play("Jump");
             timer.Start();
         }
     } 
