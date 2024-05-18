@@ -12,12 +12,13 @@ public class FlagTimer {
 
     public delegate void TimeoutEventHandler();
 
-    private bool isStopped = false;
+    private bool isStopped;
     private bool finishedCounting = false;
 
-    public FlagTimer(float time) {
+    public FlagTimer(float time, bool stopped = false) {
         this.Time = time;
         this.timeLeft = time;
+        this.isStopped = stopped;
     }
 
     public void ResetFlag() {

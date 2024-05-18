@@ -39,6 +39,9 @@ public class CharacterController2D : MonoBehaviour
     public Timer stoppedTimer;
 
     protected bool stopped = false;
+    protected bool isTouchingWall = false;
+    protected FlagTimer wallBounceTimer;
+    protected ContactPoint2D lastGroundContact;
 
     void Start()
     {
@@ -88,7 +91,20 @@ public class CharacterController2D : MonoBehaviour
             movement_speed = 0;
         }
 
+        if (isTouchingWall && !(jump && CanJump())) {
+            movement_speed = 0;
+        }
+
         rb.velocity = new Vector2(direction.x * movement_speed  * Time.deltaTime, rb.velocity.y);
+
+        if (isTouchingWall) {
+            dustParticles.Play();
+
+            // Prevent wall clipping
+            if (IsOnGround()) {
+                rb.velocityX = lastGroundContact.normal.x * 2f;
+            }
+        }
 
         if (jump && CanJump()) {
             var power = statistics.jump;
@@ -98,7 +114,10 @@ public class CharacterController2D : MonoBehaviour
             }
 
             rb.velocity = new Vector2(rb.velocity.x, power * Time.deltaTime);
-            jumpCount += 1;
+
+            if (!isTouchingWall) {
+                jumpCount += 1;
+            }
 
             if (jumpCount > 1 || ultraJump) {
                 dubleJumpParticles.Play();
@@ -159,10 +178,21 @@ public class CharacterController2D : MonoBehaviour
         }
     }
 
+    public void OnCollisionStay2D(Collision2D collision) {
+        if (collision.collider.CompareTag("ground")) {
+            lastGroundContact = collision.contacts[0];
+            isTouchingWall = collision.contacts[0].normal.y == 0;
+        }
+    }
+
     public void OnCollisionExit2D(Collision2D collision) {
 
         if (collision.collider.CompareTag("jumpbooster")) {
             dustParticles.Play();
+        }
+
+        if (collision.collider.CompareTag("ground")) {
+            isTouchingWall = false;
         }
     }
 }
