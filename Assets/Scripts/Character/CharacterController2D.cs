@@ -29,6 +29,8 @@ public class CharacterController2D : MonoBehaviour
     protected bool run;
     protected InstantFallState instantFall;
     public Timer instantFallTimer;
+    public ParticleSystem dustParticles;
+    public ParticleSystem dubleJumpParticles;
 
     protected int jumpCount;
 
@@ -97,6 +99,14 @@ public class CharacterController2D : MonoBehaviour
 
             rb.velocity = new Vector2(rb.velocity.x, power * Time.deltaTime);
             jumpCount += 1;
+
+            if (jumpCount > 1 || ultraJump) {
+                dubleJumpParticles.Play();
+            }
+            else {
+                dustParticles.Play();
+            }
+
         }
 
         if (rb.velocity.y < 2 || instantFall == InstantFallState.FALL) {
@@ -104,6 +114,7 @@ public class CharacterController2D : MonoBehaviour
             rb.velocity -= fallSpeed * Time.deltaTime * new Vector2(0, -Physics2D.gravity.y);
 
             if (instantFall == InstantFallState.FALL) {
+                dustParticles.Play();
                 rb.velocityX = 0;
             }
         }
@@ -140,5 +151,18 @@ public class CharacterController2D : MonoBehaviour
 
     public void StartInstantFall() {
         instantFall = InstantFallState.FALL;
+    }
+
+    public void OnCollisionEnter2D(Collision2D collision) {
+        if (collision.collider.CompareTag("ground")) {
+            dustParticles.Play();
+        }
+    }
+
+    public void OnCollisionExit2D(Collision2D collision) {
+
+        if (collision.collider.CompareTag("jumpbooster")) {
+            dustParticles.Play();
+        }
     }
 }

@@ -6,6 +6,7 @@ TagManager:
   tags:
   - ground
   - Bullet
+  - jumpbooster
   layers:
   - Default
   - TransparentFX
