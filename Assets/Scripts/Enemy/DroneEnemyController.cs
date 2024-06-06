@@ -62,6 +62,10 @@ public class DroneEnemyController : MonoBehaviour
         }
     }
 
+    protected float DistanceToTarget(Vector3 target) {
+        return Vector2.Distance(this.transform.position, target);
+    }
+
     public bool IsOnTarget() {
         return path.Count == 0;
     }
@@ -102,7 +106,9 @@ public class DroneEnemyController : MonoBehaviour
             }
         }
         else {
-            animator.Play("Idle");
+            if (animator.GetCurrentAnimatorStateInfo(0).IsName("Walk")) {
+                animator.Play("Idle");
+            }
         }
     }
 

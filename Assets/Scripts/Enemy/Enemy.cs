@@ -9,6 +9,9 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     private int hp;
 
+    public GameObject target = null;
+
+
     public int HP
     {
         get => hp;
@@ -18,11 +21,5 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         HP = MaxHP;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
