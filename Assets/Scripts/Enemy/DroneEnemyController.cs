@@ -5,7 +5,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class DroneEnemyController : MonoBehaviour
+public class DroneEnemyController : EnemyController
 {
     public LayerMask GroundLayer;
     protected Animator animator;
@@ -47,7 +47,7 @@ public class DroneEnemyController : MonoBehaviour
         collisionsDistance = 1f;
     }
 
-    public void PlanPath(Vector3 targetPosition) {
+    public override void PlanPath(Vector3 targetPosition) {
         this.targetPosition = targetPosition;
 
         if (!Linecast()) {
@@ -61,7 +61,7 @@ public class DroneEnemyController : MonoBehaviour
         }
     }
 
-    public void Stop() {
+    public override void Stop() {
         this.path.Clear();
         this.rb.velocity = Vector2.zero;
     }
@@ -70,7 +70,7 @@ public class DroneEnemyController : MonoBehaviour
         return Vector2.Distance(this.transform.position, target);
     }
 
-    public bool IsOnTarget() {
+    public override bool IsOnTarget() {
         return path.Count == 0;
     }
 

@@ -7,6 +7,8 @@ TagManager:
   - ground
   - Bullet
   - jumpbooster
+  - Enemy
+  - EnemyBullet
   layers:
   - Default
   - TransparentFX

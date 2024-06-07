@@ -3,7 +3,6 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-[Serializable]
 public class DroneAttackAction : BaseAction
 {
     protected new Drone parentObject;

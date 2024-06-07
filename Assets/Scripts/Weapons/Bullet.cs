@@ -29,6 +29,8 @@ public class Bullet : MonoBehaviour
     public SpriteRenderer sprite;
     public ParticleSystem particles;
 
+    public string SkipTag = "Player";
+
     void Start()
     {
         this.speed = maxSpeed / 2;
@@ -49,11 +51,22 @@ public class Bullet : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.collider.CompareTag("Player") || collision.collider.CompareTag("Bullet")) {
+        if (collision.collider.CompareTag(SkipTag) || collision.collider.CompareTag(this.tag)) {
             return;
         }
 
-        if (collision.collider.TryGetComponent(out Killable entity)) {
+        if (collision.collider.CompareTag(SkipTag)) {
+            SelfDestroy();
+            return;
+        }
+
+        var gameObject = collision.collider.gameObject;
+
+        if (collision.rigidbody != null) {
+            gameObject = collision.rigidbody.gameObject;
+        }
+
+        if (gameObject.TryGetComponent(out Killable entity)) {
             entity.Hit(damage, this.gameObject);
         }
 
