@@ -16,7 +16,7 @@ public class DronePatrolAction : BaseAction
     [SerializeField]
     protected DroneScanAction scan;
 
-    protected new Drone parent;
+    protected new Drone parentObject;
     protected DroneEnemyController controller;
 
     [SerializeField]
@@ -30,10 +30,10 @@ public class DronePatrolAction : BaseAction
     [SerializeField]
     protected string targetTag;
 
-    public override void Init(GameObject parent, ActionController actions) {
+    public override void Init(GameObject parentObject, ActionController actions) {
         this.actions = actions;
-        this.parent = parent.GetComponent<Drone>();
-        this.controller = parent.GetComponent<DroneEnemyController>();
+        this.parentObject = parentObject.GetComponent<Drone>();
+        this.controller = parentObject.GetComponent<DroneEnemyController>();
     }
 
     public override void Enter()
@@ -49,8 +49,8 @@ public class DronePatrolAction : BaseAction
     }
 
     protected Transform GetClosedPoint() {
-        var fromDelta = Vector2.Distance(this.parent.transform.position, this.from.position);
-        var toDelta = Vector2.Distance(this.parent.transform.position, this.to.position);
+        var fromDelta = Vector2.Distance(this.parentObject.transform.position, this.from.position);
+        var toDelta = Vector2.Distance(this.parentObject.transform.position, this.to.position);
 
         return toDelta < fromDelta ? to : from;
     }
@@ -70,7 +70,7 @@ public class DronePatrolAction : BaseAction
     }
 
     protected float DistanceToTarget() {
-        return Vector2.Distance(this.parent.transform.position, this.target.position);
+        return Vector2.Distance(this.parentObject.transform.position, this.target.position);
     }
 
     protected void ToggleTarget() {

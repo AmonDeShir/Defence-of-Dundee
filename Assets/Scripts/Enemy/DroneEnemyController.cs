@@ -28,7 +28,6 @@ public class DroneEnemyController : MonoBehaviour
 
     protected Vector3 margin;
 
-
     private Vector2 lastCollision;
     private float collisionsDistance;
 

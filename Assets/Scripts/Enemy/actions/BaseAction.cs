@@ -3,11 +3,11 @@ using System;
 using UnityEngine;
 
 public abstract class BaseAction : MonoBehaviour {
-    protected Enemy parent;
+    protected Enemy parentObject;
     protected ActionController actions;
 
-    public virtual void Init(GameObject parent, ActionController actions) {
-        this.parent = parent.GetComponent<Enemy>();
+    public virtual void Init(GameObject parentObject, ActionController actions) {
+        this.parentObject = parentObject.GetComponent<Enemy>();
         this.actions = actions;
     }
 

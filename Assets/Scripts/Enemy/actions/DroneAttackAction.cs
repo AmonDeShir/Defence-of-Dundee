@@ -6,7 +6,7 @@ using UnityEngine.Tilemaps;
 [Serializable]
 public class DroneAttackAction : BaseAction
 {
-    protected new Drone parent;
+    protected new Drone parentObject;
     protected DroneEnemyController controller;
 
     [SerializeField]
@@ -27,15 +27,18 @@ public class DroneAttackAction : BaseAction
     protected bool active = false;
 
     protected FlagTimer updateAttackPos;
+    protected FlagTimer forceAttackTimer;
 
     protected GameObject player = null;
+    protected GameObject lastDetectedPlayer = null;
 
-    public override void Init(GameObject parent, ActionController actions) {
+    public override void Init(GameObject parentObject, ActionController actions) {
         this.actions = actions;
-        this.parent = parent.GetComponent<Drone>();
-        this.controller = parent.GetComponent<DroneEnemyController>();
+        this.parentObject = parentObject.GetComponent<Drone>();
+        this.controller = parentObject.GetComponent<DroneEnemyController>();
     
-        this.updateAttackPos = new FlagTimer(2, true);
+        this.updateAttackPos = new FlagTimer(1, true);
+        this.forceAttackTimer = new FlagTimer(0.5f, true);
         this.active = true;
         this.scanner.radius = AttackZone;
     }
@@ -46,6 +49,11 @@ public class DroneAttackAction : BaseAction
     public override void Play()
     {
         this.updateAttackPos.Update();
+        this.forceAttackTimer.Update();
+
+        if (player == null && !this.forceAttackTimer.HasFinishedCounting) {
+            this.player = lastDetectedPlayer;
+        }
 
         if (player == null) {
             this.actions.Select(failed);
@@ -89,8 +97,8 @@ public class DroneAttackAction : BaseAction
 
     public void ScanEnter(TriggerEventArgument collider) {
         if (collider.CompareTag(targetTag)) {
-            Debug.Log("Scan enter!! " + collider.gameObject.tag + " is attackgin " + this.active);
             player = collider.gameObject;
+            forceAttackTimer.Start();
 
             if (active) {
                 this.updateAttackPos.Start();
@@ -101,7 +109,9 @@ public class DroneAttackAction : BaseAction
 
     public void ScanExit(TriggerEventArgument collider) {
         if (collider.CompareTag(targetTag)) {
+            forceAttackTimer.Start();
+            lastDetectedPlayer = player;
             player = null;
-        }      
+        }
     }
 }

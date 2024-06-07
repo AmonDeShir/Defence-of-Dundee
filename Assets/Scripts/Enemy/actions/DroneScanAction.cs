@@ -18,7 +18,7 @@ public class DroneScanAction : BaseAction
     protected BaseAction attack;
 
     [SerializeField]
-    protected String targetTag;
+    protected string targetTag;
 
     protected bool active;
 
