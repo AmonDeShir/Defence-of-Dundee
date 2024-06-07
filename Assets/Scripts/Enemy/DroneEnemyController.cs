@@ -62,6 +62,11 @@ public class DroneEnemyController : MonoBehaviour
         }
     }
 
+    public void Stop() {
+        this.path.Clear();
+        this.rb.velocity = Vector2.zero;
+    }
+
     protected float DistanceToTarget(Vector3 target) {
         return Vector2.Distance(this.transform.position, target);
     }

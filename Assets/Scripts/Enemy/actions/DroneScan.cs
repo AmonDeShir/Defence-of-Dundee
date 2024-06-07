@@ -5,23 +5,23 @@ using UnityEngine;
 [Serializable]
 public class DroneScanAction : BaseAction
 {
-    [SerializeField]
-    protected string targetTag;
-
-    [SerializeField]
-    protected float ScanRadius;
-
-    [SerializeField]
-    protected BaseAction scanSuccess;
-
     [SerializeField]    
     protected float scanTime;
 
     [SerializeField]
-    protected BaseAction scanFailed;
+    protected BaseAction patrol;
 
     protected Animator animator;
     protected DroneEnemyController controller;
+
+    [SerializeField]
+    protected BaseAction attack;
+
+    [SerializeField]
+    protected String targetTag;
+
+    protected bool active;
+
 
     public override void Init(GameObject parent, ActionController actions) {
         base.Init(parent, actions);
@@ -31,43 +31,29 @@ public class DroneScanAction : BaseAction
 
     public override void Enter()
     {
+        this.active = true;
+        this.controller.Stop();
         StartCoroutine(Scan());
     }
 
+    public override void Exit() 
+    {
+        this.active = false;
+    }
+
+
     protected IEnumerator Scan() {
-        this.animator.Play("Scan");
         yield return new WaitForSeconds(scanTime);
-        this.animator.Play("Idle");
-
-        var target = ScanForTarget();
-        this.controller.PlanPath(this.parent.transform.position);
-
-        if (target != null) {
-            this.parent.target = target;
-            Debug.Log($"scan success");
-            this.actions.Select(scanSuccess);
-        }
-        else {
-            Debug.Log($"scan failed");
-            this.actions.Select(scanFailed);
-        }
+        this.actions.Select(patrol);
     }
 
-    protected GameObject ScanForTarget() {
-        var colliders = Physics2D.OverlapCircleAll(parent.transform.position, ScanRadius);
-
-        foreach (var collider in colliders) {
-            Debug.Log(collider.tag);
-
-            if (collider.transform.gameObject.CompareTag(targetTag)) {
-                return collider.transform.gameObject;
-            }
-        }
-
-        return null;
+    public override void Play() {
+        this.animator.Play("Scan");
     }
 
-    public override void Exit() {}
-
-    public override void Play() {}
+    public void ScanEnter(TriggerEventArgument collider) {
+        if (active && collider.CompareTag(targetTag)) {
+            this.actions.Select(attack);
+        }
+    }
 }

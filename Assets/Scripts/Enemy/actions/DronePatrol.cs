@@ -19,7 +19,16 @@ public class DronePatrolAction : BaseAction
     protected new Drone parent;
     protected DroneEnemyController controller;
 
+    [SerializeField]
+    protected CircleCollider2D scanner;
+
+    [SerializeField]
+    protected BaseAction attack;
+
     protected bool active = false;
+
+    [SerializeField]
+    protected string targetTag;
 
     public override void Init(GameObject parent, ActionController actions) {
         this.actions = actions;
@@ -30,6 +39,7 @@ public class DronePatrolAction : BaseAction
     public override void Enter()
     {
         active = true;
+        scanner.radius = 0.8f;
 
         if (this.target == null) {
             this.target = GetClosedPoint();
@@ -52,11 +62,8 @@ public class DronePatrolAction : BaseAction
 
     public override void Play()
     {
-        if (this.controller.IsOnTarget()) {
+        if (DistanceToTarget() < 0.1 || this.controller.IsOnTarget()) {
             this.controller.PlanPath(this.target.position);
-        }
-
-        if (DistanceToTarget() < 0.1) {
             this.ToggleTarget();
             this.actions.Select(scan);
         }
@@ -75,10 +82,9 @@ public class DronePatrolAction : BaseAction
         }
     }
 
-    void OnTriggerEnter2D(Collider2D collider) {
-        if (active) {
-            Debug.Log("Find " + collider.name);
+    public void ScanEnter(TriggerEventArgument collider) {
+        if (active && collider.CompareTag(targetTag)) {
+            this.actions.Select(attack);
         }
-
     }
 }

@@ -6,14 +6,19 @@ using UnityEngine.Events;
 
 [System.Serializable]
 public class TriggerEventArgument {
-    public Vector3 position;
-    public string tag;
 
-    public TriggerEventArgument(Collider2D collider): this(collider.transform.position, collider.tag) {}
+    public Collider2D collider;
+    public GameObject gameObject;
+    public Transform transform;
 
-    public TriggerEventArgument(Vector3 position, string tag) {
-        this.position = position;
-        this.tag = tag;
+    public TriggerEventArgument(Collider2D collider) {
+        this.gameObject = collider.gameObject;
+        this.collider = collider;
+        this.transform = collider.gameObject.transform;
+    }
+
+    public bool CompareTag(string tag) {
+        return this.collider.CompareTag(tag);
     }
 }
 

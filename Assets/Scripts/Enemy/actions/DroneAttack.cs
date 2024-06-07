@@ -18,44 +18,44 @@ public class DroneAttackAction : BaseAction
     [SerializeField]
     protected Tilemap ground;
 
-
     [SerializeField]
     protected BaseAction failed;
+
+    [SerializeField]
+    protected CircleCollider2D scanner;
+
+    protected bool active = false;
+
+    protected FlagTimer updateAttackPos;
+
+    protected GameObject player = null;
 
     public override void Init(GameObject parent, ActionController actions) {
         this.actions = actions;
         this.parent = parent.GetComponent<Drone>();
         this.controller = parent.GetComponent<DroneEnemyController>();
+    
+        this.updateAttackPos = new FlagTimer(2, true);
+        this.active = true;
+        this.scanner.radius = AttackZone;
     }
 
-    public override void Exit() {}
+    public override void Exit() {
+    }
 
     public override void Play()
     {
-        if (!controller.IsOnTarget()) {
-            return;
-        }
-        
-        var player = ScanForTarget();
-            
+        this.updateAttackPos.Update();
+
         if (player == null) {
             this.actions.Select(failed);
-            return;
+            this.updateAttackPos.Stop();
         }
 
-        this.ReachPlayer(player.transform.position);
-    }
-    
-    protected GameObject ScanForTarget() {
-        var colliders = Physics2D.OverlapCircleAll(parent.transform.position, AttackZone);
-
-        foreach (var collider in colliders) {
-            if (collider.CompareTag(targetTag)) {
-                return collider.gameObject;
-            }
+        if(this.updateAttackPos.HasFinishedCounting) {
+            this.updateAttackPos.Start();
+            ReachPlayer(player.transform.position);
         }
-
-        return null;
     }
 
     protected void ReachPlayer(Vector3 position) {
@@ -77,5 +77,31 @@ public class DroneAttackAction : BaseAction
         controller.PlanPath(target);
     }
 
-    public override void Enter() { }
+    public override void Enter() {
+        scanner.radius = AttackZone;
+        this.updateAttackPos.Start();
+
+        if (player != null) {
+            this.updateAttackPos.Start();
+            controller.PlanPath(player.transform.position);
+        }
+    }
+
+    public void ScanEnter(TriggerEventArgument collider) {
+        if (collider.CompareTag(targetTag)) {
+            Debug.Log("Scan enter!! " + collider.gameObject.tag + " is attackgin " + this.active);
+            player = collider.gameObject;
+
+            if (active) {
+                this.updateAttackPos.Start();
+                controller.PlanPath(player.transform.position);
+            }
+        }
+    }
+
+    public void ScanExit(TriggerEventArgument collider) {
+        if (collider.CompareTag(targetTag)) {
+            player = null;
+        }      
+    }
 }
