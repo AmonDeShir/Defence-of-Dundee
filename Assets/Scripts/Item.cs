@@ -1,18 +1,43 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Item : MonoBehaviour
+[RequireComponent(typeof(SpriteRenderer))]
+public abstract class Item : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    protected new SpriteRenderer renderer;
+    
+    [SerializeField]
+    protected ParticleSystem destroyParticles;
+
+    [SerializeField]
+    protected ParticleSystem normalParticles;
+
+    [SerializeField]
+    protected String onlyForTag = "Player";
+
+    protected bool disabled = false;
+
+    protected virtual void Start()
     {
-        
+        renderer = this.GetComponent<SpriteRenderer>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    public abstract void Effect(Killable target);
+
+    void OnTriggerEnter2D(Collider2D collider) {
+        if (!disabled && collider.TryGetComponent(out Killable entity)) {
+            if (onlyForTag != null && !entity.CompareTag(onlyForTag)) {
+                return;
+            }
+
+            this.Effect(entity);
+            renderer.enabled = false;
+            normalParticles.Stop();
+            destroyParticles.Play();
+            Destroy(transform.parent.gameObject, 2);
+            disabled = true;
+        }     
     }
 }

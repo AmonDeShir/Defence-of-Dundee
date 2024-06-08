@@ -11,4 +11,6 @@ public class Killable : MonoBehaviour
     public virtual void Hit(int damage, GameObject attacker) {
         Kill();
     }
+
+    public virtual void Heal(int value) {}
 }

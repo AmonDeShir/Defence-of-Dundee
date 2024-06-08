@@ -27,4 +27,8 @@ public class EnemyKillable : Killable
             return;
         }
     }
+
+    public override void Heal(int value) {
+        this.data.HP += value;
+    }
 }

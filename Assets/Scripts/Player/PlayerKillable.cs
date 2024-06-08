@@ -42,4 +42,8 @@ public class PlayerKillable : Killable
 
         controller.StopMovement();
     }
+
+    public override void Heal(int value) {
+        this.data.HP += value;
+    }
 }
