@@ -10538,5 +10538,5 @@ MonoBehaviour:
   scanner: {fileID: 6601887410351399924}
   attack: {fileID: 4325612024200986570}
   targetTag: Player
-  scanRadius: 0.7
+  scanRadius: 1.5
   scan: {fileID: 6924846191350622858}
