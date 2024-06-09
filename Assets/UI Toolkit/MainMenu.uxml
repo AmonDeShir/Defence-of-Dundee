@@ -1,0 +1,18 @@
+<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/MainMenuStyle.uss?fileID=7433441132597879392&amp;guid=777c04e85c01a2b7cafd225b80caac43&amp;type=3#MainMenuStyle" />
+    <engine:VisualElement style="flex-grow: 1;">
+        <engine:VisualElement class="background" style="flex-grow: 1; color: rgb(255, 255, 255); overflow: visible;">
+            <engine:VisualElement name="VisualElement" class="background__image" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/UI%20Toolkit/Background/0.jpg?fileID=2800000&amp;guid=ecf16a5d057512199a8a8789b86183f3&amp;type=3#0&quot;); -unity-background-scale-mode: scale-and-crop;" />
+        </engine:VisualElement>
+        <engine:VisualElement name="VisualElement" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-image: url(&quot;project://database/Assets/UI/MenuDust.renderTexture?fileID=8400000&amp;guid=8c230e42173809406852ec286d5457db&amp;type=2#MenuDust&quot;);">
+            <engine:Label text="Defence  of Dundee" class="logo" style="height: 249px; justify-content: center; align-items: center; -unity-text-align: middle-center; color: rgb(104, 174, 193); -unity-text-outline-color: rgb(0, 0, 4);" />
+            <engine:VisualElement style="flex-grow: 1; flex-direction: column; align-items: center; justify-content: center;">
+                <engine:Button text="Play" name="Button" class="button" style="background-color: rgba(255, 255, 255, 0); border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0;" />
+                <engine:Button text="Continue" class="button" style="background-color: rgba(188, 188, 188, 0); border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0;" />
+                <engine:Button text="Settings" class="button" style="background-color: rgba(0, 0, 0, 0); border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0;" />
+                <engine:Button text="credits" class="button" style="background-color: rgba(0, 0, 0, 0); border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0;" />
+                <engine:Button text="Exit" class="button" style="background-color: rgba(255, 255, 255, 0); border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0;" />
+            </engine:VisualElement>
+        </engine:VisualElement>
+    </engine:VisualElement>
+</engine:UXML>

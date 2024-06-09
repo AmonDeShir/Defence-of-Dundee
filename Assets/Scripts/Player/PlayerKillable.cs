@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(CharacterController2D))]
@@ -26,6 +27,12 @@ public class PlayerKillable : Killable
     public override void Kill() {
         this.transform.position = data.checkpoint;
         data.ResetHP();
+        data.Lives -= 1;
+        
+        if (data.Lives == 0) {
+            SceneManager.LoadScene(1);
+        }
+
         Camera.TeleportCameraToTarget();
     }
 

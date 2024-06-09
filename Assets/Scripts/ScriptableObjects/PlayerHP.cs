@@ -11,6 +11,10 @@ public class PlayerHP : ScriptableObject, ISerializationCallbackReceiver
     public Vector3 checkpoint;
 
     public int MaxHP;
+    public int InitialLives;
+
+    [SerializeField]
+    private int lives;
 
     [SerializeField]
     private int hp;
@@ -21,12 +25,24 @@ public class PlayerHP : ScriptableObject, ISerializationCallbackReceiver
         set { hp = Math.Clamp(value, 0, MaxHP); }
     }
 
+    public int Lives
+    {
+        get => lives;
+        set { lives = Math.Max(value, 0); }
+    }
+
+
     public void ResetHP() {
         HP = MaxHP;
     }
 
+    public void ResetLives() {
+        Lives = InitialLives;
+    }
+
     public void OnAfterDeserialize() {
 		ResetHP();
+        ResetLives();
     }
 
     public void OnBeforeSerialize() {}

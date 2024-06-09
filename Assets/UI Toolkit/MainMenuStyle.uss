@@ -1,0 +1,59 @@
+.background {
+    background-color: rgb(35, 34, 40);
+}
+
+.button {
+    -unity-font-definition: url("project://database/Assets/UI/fonts/MOOD.ttf?fileID=12800000&guid=9c131d268aa5a2de1b0bfc8a356979d2&type=3#MOOD");
+    -unity-text-outline-color: rgb(0, 0, 0);
+    font-size: 15px;
+    color: rgb(0, 0, 0);
+    -unity-text-outline-width: 0;
+    background-image: url("project://database/Assets/UI/Ultimate%20Pixel%203.2/Menu%20buttons%20v2/Blue/menu_button01.png?fileID=8063883253558619922&guid=4eb76e387701f2cab87ef097e4f0b116&type=3#menu_button01_0");
+    -unity-slice-left: 7;
+    -unity-background-scale-mode: stretch-to-fill;
+    -unity-slice-top: 7;
+    -unity-slice-bottom: 8;
+    -unity-slice-right: 50;
+    background-color: rgba(255, 255, 255, 0);
+    -unity-slice-scale: 3.4px;
+    -unity-text-align: middle-center;
+    justify-content: center;
+    align-items: center;
+    text-overflow: clip;
+    padding-top: 10px;
+    padding-right: 10px;
+    padding-bottom: 0;
+    padding-left: 10px;
+    width: 350px;
+    height: 80px;
+    transition-property: color;
+    transition-duration: 0.25s;
+    -unity-paragraph-spacing: 0;
+}
+
+.button:hover {
+    color: rgb(255, 255, 255);
+    font-size: 15px;
+}
+
+.button:active {
+    background-image: url("project://database/Assets/UI/Ultimate%20Pixel%203.2/Menu%20buttons%20v2/Blue/menu_button01.png?fileID=8260365604746124111&guid=4eb76e387701f2cab87ef097e4f0b116&type=3#menu_button01_1");
+    -unity-slice-left: 7;
+    -unity-slice-top: 9;
+    -unity-slice-right: 50;
+    -unity-slice-bottom: 8;
+    -unity-slice-scale: 3px;
+    font-size: 15px;
+    padding-top: 16px;
+    padding-right: 10px;
+    padding-left: 10px;
+}
+
+.logo {
+    -unity-font-definition: url("project://database/Assets/UI/fonts/MOOD%20MKII.ttf?fileID=12800000&guid=93a11640ed7092de2ac0930ad70d3ec4&type=3#MOOD MKII");
+    font-size: 40px;
+    color: rgb(0, 0, 0);
+    -unity-font-style: normal;
+    -unity-text-outline-width: 4px;
+    -unity-text-outline-color: rgb(187, 0, 255);
+}

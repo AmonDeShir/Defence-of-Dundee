@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: PlayerHP
   m_EditorClassIdentifier: 
   level: 0
-  checkpoint: {x: 0, y: 0, z: 0}
+  checkpoint: {x: 1.9, y: -2.849, z: 0}
   MaxHP: 500
+  InitialLives: 3
+  lives: 3
   hp: 500
