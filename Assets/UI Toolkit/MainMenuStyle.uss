@@ -65,3 +65,36 @@
 .text {
     -unity-font-definition: url("project://database/Assets/UI/fonts/MOOD.ttf?fileID=12800000&guid=9c131d268aa5a2de1b0bfc8a356979d2&type=3#MOOD");
 }
+
+.slider-value {
+}
+
+.slider-minus {
+    background-image: url("project://database/Assets/UI/Ultimate%20Pixel%203.2/Inventory%20Pack/blue/Volume_slider.png?fileID=-3976812718019263666&guid=5ba9ecfdda64f58fbb3b60c60b8dcf9c&type=3#Volume_slider_0");
+    -unity-background-scale-mode: scale-to-fit;
+}
+
+.slider-minus:hover {
+    background-image: url("project://database/Assets/UI/Ultimate%20Pixel%203.2/Inventory%20Pack/blue/Volume_slider.png?fileID=-62454008&guid=5ba9ecfdda64f58fbb3b60c60b8dcf9c&type=3#Volume_slider_2");
+    -unity-background-scale-mode: scale-to-fit;
+}
+
+.slider-minus:active {
+    background-image: url("project://database/Assets/UI/Ultimate%20Pixel%203.2/Inventory%20Pack/blue/Volume_slider.png?fileID=-6640790573585891475&guid=5ba9ecfdda64f58fbb3b60c60b8dcf9c&type=3#Volume_slider_4");
+    -unity-background-scale-mode: scale-to-fit;
+}
+
+.slider-plus {
+    background-image: url("project://database/Assets/UI/Ultimate%20Pixel%203.2/Inventory%20Pack/blue/Volume_slider.png?fileID=-1786318133&guid=5ba9ecfdda64f58fbb3b60c60b8dcf9c&type=3#Volume_slider_1");
+    -unity-background-scale-mode: scale-to-fit;
+}
+
+.slider-plus:hover {
+    background-image: url("project://database/Assets/UI/Ultimate%20Pixel%203.2/Inventory%20Pack/blue/Volume_slider.png?fileID=-1786361543&guid=5ba9ecfdda64f58fbb3b60c60b8dcf9c&type=3#Volume_slider_3");
+    -unity-background-scale-mode: scale-to-fit;
+}
+
+.slider-plus:active {
+    background-image: url("project://database/Assets/UI/Ultimate%20Pixel%203.2/Inventory%20Pack/blue/Volume_slider.png?fileID=-261055920&guid=5ba9ecfdda64f58fbb3b60c60b8dcf9c&type=3#Volume_slider_5");
+    -unity-background-scale-mode: scale-to-fit;
+}

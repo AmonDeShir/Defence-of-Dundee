@@ -9,7 +9,6 @@ using UnityEngine.UIElements;
 public abstract class MenuScreen : MonoBehaviour
 {
     protected UIDocument uIDocument;
-    protected VisualElement root;
 
     [SerializeField]
     protected AudioSource clickSound;
