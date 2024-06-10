@@ -57,3 +57,11 @@
     -unity-text-outline-width: 4px;
     -unity-text-outline-color: rgb(187, 0, 255);
 }
+
+.panel {
+    background-image: url("project://database/Assets/UI/Ultimate%20Pixel%203.2/Inventory%20Pack/blue/slot_2_UI.png?fileID=2800000&guid=4457d94502983bf0aa7d425f9d7fbdcd&type=3#slot_2_UI");
+}
+
+.text {
+    -unity-font-definition: url("project://database/Assets/UI/fonts/MOOD.ttf?fileID=12800000&guid=9c131d268aa5a2de1b0bfc8a356979d2&type=3#MOOD");
+}
