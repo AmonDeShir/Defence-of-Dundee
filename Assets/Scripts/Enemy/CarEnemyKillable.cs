@@ -20,6 +20,9 @@ public class CarEnemyKillable : EnemyKillable
 
     public SpriteRenderer gun;
 
+    public AudioSource boomSound;
+    public AudioSource engineSound;
+
     public new void Start() {
         base.Start();
 
@@ -41,6 +44,9 @@ public class CarEnemyKillable : EnemyKillable
             this.particlesMetal.Play();
             this.spriteRenderer.enabled = false;
             this.gun.enabled = false;
+            this.engineSound.Stop();
+            this.boomSound.Play();
+
             Destroy(this.transform.parent.gameObject, 1f);
         }
     }

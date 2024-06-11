@@ -33,7 +33,6 @@ public class DroneEnemyController : EnemyController
 
     private FlagTimer flyOffTImer;
 
-
     void Start()
     {
         animator = GetComponent<Animator>();

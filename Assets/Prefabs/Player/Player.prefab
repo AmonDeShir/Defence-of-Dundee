@@ -5809,6 +5809,7 @@ GameObject:
   - component: {fileID: -5556448103970514084}
   - component: {fileID: -8066007921014305857}
   - component: {fileID: 1527346781594250143}
+  - component: {fileID: 8317388547502359198}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -5950,6 +5951,9 @@ MonoBehaviour:
   dubleJumpParticles: {fileID: 6338591951390193702}
   stoppedTimer:
     IsStopped: 0
+    Time: 0
+    timeLeft: 0
+  playGroundSoundTimer:
     Time: 0
     timeLeft: 0
   runningSound: {fileID: 1527346781594250143}
@@ -6491,6 +6495,14 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!81 &8317388547502359198
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7919197183534920234}
+  m_Enabled: 1
 --- !u!1 &8182361878309908398
 GameObject:
   m_ObjectHideFlags: 0

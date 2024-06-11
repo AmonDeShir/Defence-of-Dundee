@@ -21,6 +21,9 @@ public class DroneEnemyKillable : EnemyKillable
     public ParticleSystem particlesMetal;
     public ParticleSystem particlesFire;
 
+    public AudioSource boomSound;
+    public AudioSource flyingSound;
+
     public new void Start() {
         base.Start();
 
@@ -45,6 +48,7 @@ public class DroneEnemyKillable : EnemyKillable
             this.rb.velocity = Vector2.zero;
             this.particlesFire.Play();
             this.damageArea.enabled = false;
+            this.flyingSound.Stop();
         }
     }
 
@@ -52,12 +56,17 @@ public class DroneEnemyKillable : EnemyKillable
     {
         var contact = collision.contacts[0];
 
-        if (contact.collider.CompareTag("ground") && this.isDeath) {
+        if (ShouldDestroyOnContact(contact.collider) && this.isDeath) {
             this.enabled = false;
             this.particlesMetal.Play();
             this.rb.simulated = false;
             this.spriteRenderer.enabled = false;
+            this.boomSound.Play();
             Destroy(this.transform.parent.gameObject, 1f);
         }
+    }
+
+    protected bool ShouldDestroyOnContact(Collider2D collider) {
+        return collider.CompareTag("ground") || collider.CompareTag("jumpbooster");
     }
 }

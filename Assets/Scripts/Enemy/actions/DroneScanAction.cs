@@ -22,6 +22,9 @@ public class DroneScanAction : BaseAction
 
     protected bool active;
 
+    [SerializeField]
+    protected AudioSource scanSound;
+
 
     public override void Init(GameObject parent, ActionController actions) {
         base.Init(parent, actions);
@@ -43,8 +46,10 @@ public class DroneScanAction : BaseAction
 
 
     protected IEnumerator Scan() {
+        this.scanSound.Play();
         yield return new WaitForSeconds(scanTime);
         this.actions.Select(patrol);
+        this.scanSound.Stop();
     }
 
     public override void Play() {
