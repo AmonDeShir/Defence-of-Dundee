@@ -15,7 +15,10 @@ public abstract class Item : MonoBehaviour
     protected ParticleSystem normalParticles;
 
     [SerializeField]
-    protected String onlyForTag = "Player";
+    protected string onlyForTag = "Player";
+
+    [SerializeField]
+    protected AudioSource pickUpSound;
 
     protected bool disabled = false;
 
@@ -36,6 +39,7 @@ public abstract class Item : MonoBehaviour
             renderer.enabled = false;
             normalParticles.Stop();
             destroyParticles.Play();
+            pickUpSound.Play();
             Destroy(transform.parent.gameObject, 2);
             disabled = true;
         }     
