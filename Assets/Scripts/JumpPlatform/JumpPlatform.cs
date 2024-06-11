@@ -5,6 +5,9 @@ using UnityEngine;
 [RequireComponent(typeof(Animator))]
 public class JumpPlatform : MonoBehaviour
 {
+    public AudioSource releaseSound;
+    public AudioSource prepareSound;
+
     public float animationTime = 5f;
     public float jumpPower = 11f;
 
@@ -38,6 +41,7 @@ public class JumpPlatform : MonoBehaviour
             target = collider.attachedRigidbody;
             animator.Play("Jump");
             timer.Start();
+            prepareSound.Play();
         }
     } 
 
@@ -55,7 +59,7 @@ public class JumpPlatform : MonoBehaviour
     private void Jump() {
         if (target != null) {
             var power = jumpPower;
-
+            
             if (previousTarget == target) {
                 power *= 1.25f;
             }
@@ -64,6 +68,8 @@ public class JumpPlatform : MonoBehaviour
             previousTarget = target;
             deactivationTimer.Start();
             target = null;
+            prepareSound.Stop();
+            releaseSound.Play();
         }
     }
 

@@ -37,11 +37,17 @@ public class CharacterController2D : MonoBehaviour
     public Vector2 Direction { get { return direction; }}
 
     public Timer stoppedTimer;
+    public FlagTimer playGroundSoundTimer;
 
     protected bool stopped = false;
     protected bool isTouchingWall = false;
     protected FlagTimer wallBounceTimer;
     protected ContactPoint2D lastGroundContact;
+
+    public AudioSource runningSound;
+    public AudioSource contactGroundSound;
+    public AudioSource doubleJumpSound;
+    public AudioSource jumpSound;
 
     void Start()
     {
@@ -51,6 +57,7 @@ public class CharacterController2D : MonoBehaviour
         direction = Vector2.zero;
         stoppedTimer = new Timer(0.5f, StartMovement, false);
         instantFallTimer = new Timer(0.1f, StartInstantFall, false);
+        playGroundSoundTimer = new FlagTimer(0.5f, true);
     }
 
     protected void Update() {
@@ -62,6 +69,7 @@ public class CharacterController2D : MonoBehaviour
 
         instantFallTimer.Update();
         stoppedTimer.Update();
+        playGroundSoundTimer.Update();
     }
 
     void FixedUpdate()
@@ -121,9 +129,11 @@ public class CharacterController2D : MonoBehaviour
 
             if (jumpCount > 1 || ultraJump) {
                 dubleJumpParticles.Play();
+                doubleJumpSound.Play();
             }
             else {
                 dustParticles.Play();
+                jumpSound.Play();
             }
 
         }
@@ -173,8 +183,9 @@ public class CharacterController2D : MonoBehaviour
     }
 
     public void OnCollisionEnter2D(Collision2D collision) {
-        if (collision.collider.CompareTag("ground")) {
+        if (collision.collider.CompareTag("ground") && playGroundSoundTimer.HasFinishedCounting) {
             dustParticles.Play();
+            contactGroundSound.Play();
         }
     }
 
@@ -182,6 +193,18 @@ public class CharacterController2D : MonoBehaviour
         if (collision.collider.CompareTag("ground")) {
             lastGroundContact = collision.contacts[0];
             isTouchingWall = collision.contacts[0].normal.y == 0;
+
+            if (direction.x != 0) {
+                if (runningSound.time == 0) {
+                    runningSound.Play();
+                }
+                else {
+                    runningSound.UnPause();
+                }
+            }
+            else {
+                runningSound.Pause();
+            }
         }
     }
 
@@ -193,6 +216,9 @@ public class CharacterController2D : MonoBehaviour
 
         if (collision.collider.CompareTag("ground")) {
             isTouchingWall = false;
+            runningSound.Pause();
         }
+
+        playGroundSoundTimer.Start();
     }
 }
