@@ -12,6 +12,9 @@ public class Shoot : MonoBehaviour
 
     public float fireRate;
 
+    [SerializeField]
+    private AudioSource sound;
+
     public void Start() {
         canShoot = new FlagTimer(1/fireRate);
         canShoot.Start();
@@ -21,6 +24,7 @@ public class Shoot : MonoBehaviour
         if (canShoot.HasFinishedCounting) {
             Instantiate(bullet, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
             canShoot.Start();
+            sound.Play();
         }
     }
 
