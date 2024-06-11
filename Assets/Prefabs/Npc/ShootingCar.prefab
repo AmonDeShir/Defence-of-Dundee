@@ -10599,6 +10599,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gun: {fileID: 3538997115363690020}
   aim: {fileID: 8737146961962237656}
+  GroundLayer:
+    serializedVersion: 2
+    m_Bits: 64
   targetTag: Player
   exitAction: {fileID: 3119556194657626063}
 --- !u!1 &7209707196089384153

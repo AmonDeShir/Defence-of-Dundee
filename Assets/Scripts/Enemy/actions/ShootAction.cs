@@ -10,6 +10,9 @@ public class ShootAction : BaseAction {
     protected SimpleAim aim;
 
     [SerializeField]
+    protected LayerMask GroundLayer;
+
+    [SerializeField]
     protected string targetTag;
 
     protected GameObject player = null;
@@ -25,12 +28,19 @@ public class ShootAction : BaseAction {
         aim.Target = player;
 
         if (player != null) {
-            gun.SpawnBullet();
+            if (!Linecast(player.transform.position)) {
+                gun.SpawnBullet();
+            }
         }
         else {
             actions.Select(exitAction);
         } 
     }
+
+    protected bool Linecast(Vector2 targetPosition) {
+        return Physics2D.Linecast(transform.position, targetPosition, GroundLayer);
+    }
+
 
     public override void Exit() 
     {
