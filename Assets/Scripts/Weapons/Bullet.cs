@@ -7,6 +7,12 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     [SerializeField]
+    private AudioSource spawnSound;
+
+    [SerializeField]
+    private AudioSource boomSound;
+
+    [SerializeField]
     private int damage;
 
     [SerializeField]
@@ -15,7 +21,6 @@ public class Bullet : MonoBehaviour
     [SerializeField]
     private float maxSpeed;
 
-    [SerializeField]
     public float acceleration = 5f;
 
     private float speed;
@@ -39,6 +44,7 @@ public class Bullet : MonoBehaviour
 
         this.autoDestroy = new Timer(lifeTime, ()=>SelfDestroy(), true);
 
+        this.spawnSound.Play();
     }
 
     void FixedUpdate()
@@ -77,6 +83,8 @@ public class Bullet : MonoBehaviour
         Destroy(this.gameObject, 1);
         this.particles.Play();
         this.sprite.gameObject.SetActive(false);
+        this.boomSound.Play();
+
         isStopped = true;
     }
 }
