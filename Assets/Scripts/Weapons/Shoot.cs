@@ -7,8 +7,7 @@ public class Shoot : MonoBehaviour
     public GameObject bullet;
     public FlagTimer canShoot;
 
-    [SerializeField]
-    private Transform bulletSpawnPoint;
+    public Transform bulletSpawnPoint;
 
     public float fireRate;
 

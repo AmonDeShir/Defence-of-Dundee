@@ -15,6 +15,7 @@ public class ShootAction : BaseAction {
     [SerializeField]
     protected string targetTag;
 
+    [SerializeField]
     protected GameObject player = null;
 
     public BaseAction exitAction;
@@ -38,7 +39,7 @@ public class ShootAction : BaseAction {
     }
 
     protected bool Linecast(Vector2 targetPosition) {
-        return Physics2D.Linecast(transform.position, targetPosition, GroundLayer);
+        return Physics2D.Linecast(gun.bulletSpawnPoint.transform.position, targetPosition, GroundLayer);;
     }
 
 
@@ -47,12 +48,16 @@ public class ShootAction : BaseAction {
     }
 
     public void ScanEnter(TriggerEventArgument collider) {
+        Debug.Log("Enter! " + collider.gameObject.tag);
+
         if (collider.CompareTag(targetTag)) {
             player = collider.gameObject;
         }
     }
 
     public void ScanExit(TriggerEventArgument collider) {
+        Debug.Log("Exit! " + collider.gameObject.tag);
+
         if (collider.CompareTag(targetTag)) {
             player = null;
         }

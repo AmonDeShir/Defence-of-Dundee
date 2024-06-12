@@ -14,7 +14,6 @@ public class DroneAttackAction : BaseAction
     [SerializeField]
     protected float AttackZone = 1.5f;
 
-    [SerializeField]
     protected Tilemap ground;
 
     [SerializeField]
@@ -40,6 +39,7 @@ public class DroneAttackAction : BaseAction
         this.forceAttackTimer = new FlagTimer(0.5f, true);
         this.active = true;
         this.scanner.radius = AttackZone;
+        this.ground = GameObject.Find("Tilemap_Base").GetComponent<Tilemap>();
     }
 
     public override void Exit() {

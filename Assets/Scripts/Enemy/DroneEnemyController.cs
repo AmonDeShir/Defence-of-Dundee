@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.Tilemaps;
 
 public class DroneEnemyController : EnemyController
 {
@@ -16,7 +15,7 @@ public class DroneEnemyController : EnemyController
     [SerializeField]
     protected Vector3 targetPosition;
 
-    public AStar pathfinder;
+    protected AStar pathfinder;
 
     protected Stack<Vector3> path;
 
@@ -37,6 +36,8 @@ public class DroneEnemyController : EnemyController
     {
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
+        pathfinder = FindFirstObjectByType<AStar>();
+        Debug.Log(pathfinder);
 
         flyOffTImer = new FlagTimer(0.5f);
 

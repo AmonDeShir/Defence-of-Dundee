@@ -7,9 +7,6 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     [SerializeField]
-    private AudioSource spawnSound;
-
-    [SerializeField]
     private AudioSource boomSound;
 
     [SerializeField]
@@ -43,8 +40,6 @@ public class Bullet : MonoBehaviour
         this.isStopped = false;
 
         this.autoDestroy = new Timer(lifeTime, ()=>SelfDestroy(), true);
-
-        this.spawnSound.Play();
     }
 
     void FixedUpdate()

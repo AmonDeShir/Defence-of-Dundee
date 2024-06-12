@@ -4920,7 +4920,6 @@ Transform:
   m_LocalScale: {x: 0.8, y: 0.8, z: 0.2}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1724878135113488183}
   - {fileID: 8581153830929932611}
   m_Father: {fileID: 1607762502155086225}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4936,7 +4935,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d70ad9b9e9e44ccdaa7c432407007de4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  current: {fileID: 3119556194657626063}
+  current: {fileID: 4723779771709836771}
 --- !u!1 &735956151596167665
 GameObject:
   m_ObjectHideFlags: 0
@@ -5019,7 +5018,7 @@ CircleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Radius: 1.2
+  m_Radius: 2
 --- !u!114 &4757827507781448742
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5035,7 +5034,7 @@ MonoBehaviour:
   onEnter:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3119556194657626063}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: PatrolAction, Assembly-CSharp
         m_MethodName: ScanEnter
         m_Mode: 0
@@ -5373,7 +5372,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d2b7a0da6e5cb47a811a663c28bc0dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Damage: 1000
+  Damage: 10
 --- !u!114 &5440519614802121372
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10900,7 +10899,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   targetTag: Player
-  exitAction: {fileID: 3119556194657626063}
+  exitAction: {fileID: 4723779771709836771}
 --- !u!1 &7209707196089384153
 GameObject:
   m_ObjectHideFlags: 0
@@ -10933,57 +10932,6 @@ Transform:
   - {fileID: 7772430312159672226}
   m_Father: {fileID: 1607762502155086225}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &7265559472083298506
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1724878135113488183}
-  - component: {fileID: 3119556194657626063}
-  m_Layer: 0
-  m_Name: Patrol
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1724878135113488183
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7265559472083298506}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 8241906537475421091}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3119556194657626063
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7265559472083298506}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 80f18c43546a8f335bf9db78eb2b595a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  from: {fileID: 5569971693213242266}
-  to: {fileID: 8916965909584091566}
-  target: {fileID: 0}
-  scanner: {fileID: 4505002050642113340}
-  attack: {fileID: 4723779771709836771}
-  targetTag: Player
-  scanRadius: 1.2
 --- !u!1 &9019912657501297050
 GameObject:
   m_ObjectHideFlags: 0
